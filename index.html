@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>aframe animation tick</title>
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+</head>
+<body>
+  <a-scene>
+    <a-box id="animated-box" position="0 2 -5" rotation="0 0 0" color="#4CC3D9"></a-box>
+
+    <script>
+      AFRAME.registerComponent('rotate-box', {
+        init: function () {
+          this.degreesPerSecond = 45;
+        },
+        tick: function (time, timeDelta) {
+          var rotation = this.el.getAttribute('rotation');
+          rotation.y += this.degreesPerSecond * (timeDelta / 1000);
+          this.el.setAttribute('rotation', rotation);
+        }
+      });
+
+      document.querySelector('#animated-box').setAttribute('rotate-box', '');
+    </script>
+  </a-scene>
+</body>
+</html>
